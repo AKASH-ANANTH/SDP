@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Organ Finder</title>
+    <style>
+        :root{--accent:#0077cc;--muted:#6b7280}
+        *{box-sizing:border-box}
+        body{margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#f7fbff,#f3f9ff);color:#072033}
+
+        header{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;background:white;box-shadow:0 6px 18px rgba(7,32,51,0.04)}
+        .brand{display:flex;align-items:center;gap:12px}
+        .brand h1{margin:0;color:var(--accent);font-size:18px}
+        nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
+        nav a{color:#123;text-decoration:none;padding:8px 12px;border-radius:8px}
+        nav a.primary{background:var(--accent);color:white}
+        nav a:hover{background:rgba(0,119,204,0.06)}
+
+        .wrap{max-width:1100px;margin:22px auto;padding:18px}
+        .intro{display:flex;align-items:center;justify-content:space-between;gap:12px}
+        .intro h2{margin:0}
+        .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:18px}
+
+        .card{background:white;border-radius:12px;padding:14px;box-shadow:0 8px 24px rgba(2,18,32,0.06);display:flex;flex-direction:column}
+        .card img{width:100%;height:160px;object-fit:cover;border-radius:8px}
+        .card h3{margin:12px 0 6px 0;font-size:18px;color:#072033}
+        .meta{color:var(--muted);font-size:14px;margin-bottom:10px}
+        .section-title{font-weight:600;margin:8px 0 6px 0}
+        .importance{background:#f0fbff;border-radius:8px;padding:10px;color:#055; font-size:14px}
+
+        footer{max-width:1100px;margin:22px auto;text-align:center;color:var(--muted);font-size:13px}
+
+        @media (max-width:520px){.card img{height:120px}}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <img src="E:\RMK\SDP PROJECT\LOGO.png" alt="logo" width="36" height="36" style="border-radius:8px"/>
+            <h1>Organ Finder</h1>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="sdpminiproject.html">Home</a></li>
+                <li><a href="#login">Login</a></li>
+                <li><a href="#signup" class="primary">Signup</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="wrap">
+        <div class="intro">
+            <div>
+                <h2>Common Organs — details & importance</h2>
+                <p class="meta">Click any card to see demo details. Replace images with your assets if needed.</p>
+            </div>
+        </div>
+
+        <div class="grid" id="grid"></div>
+    </main>
+
+    <footer>
+        &copy; Organ Info - demo page. Images are placeholders from Unsplash.
+    </footer>
+
+    <script>
+        const organs = [
+            {key:'heart', name:'Heart', img:'https://images.unsplash.com/photo-1582719478250-6c9d5f7d4c2b?q=80&w=1200&auto=format&fit=crop', details:'The heart pumps blood through the body using a system of chambers and valves.', importance:'Essential for circulating oxygenated blood; damage leads to life-threatening conditions.'},
+            {key:'kidney', name:'Kidney', img:'E:\RMK\SDP PROJECT\KIDNEY.png', details:'Kidneys filter waste and excess fluid from the blood to make urine.', importance:'Critical for waste removal, fluid balance and regulating blood pressure.'},
+            {key:'liver', name:'Liver', img:'https://images.unsplash.com/photo-1580281657521-9b8e2db9fabf?q=80&w=1200&auto=format&fit=crop', details:'The liver processes nutrients and detoxifies the blood.', importance:'Key for metabolism, detoxification, and producing vital proteins.'},
+            {key:'lungs', name:'Lungs', img:'https://images.unsplash.com/photo-1580281657443-0b4dfc8f6e2a?q=80&w=1200&auto=format&fit=crop', details:'Lungs exchange oxygen and carbon dioxide between blood and air.', importance:'Essential for breathing and oxygen delivery to tissues.'},
+            {key:'eyes', name:'Eyes', img:'https://https://drive.google.com/file/d/1K8AuwcpEas_dZQKPbU6eDJBwh11t6hMY/view?usp=drive_linkimages.unsplash.com/photo-1600267181420-0b9c9b2b9f0b?q=80&w=1200&auto=format&fit=crop', details:'Eyes detect light and send visual information to the brain.', importance:'Provide the sense of sight — crucial for daily function and spatial awareness.'},
+            {key:'pancreas', name:'Pancreas', img:'https://images.unsplash.com/photo-1580281657035-3b6e3c2f8a7b?q=80&w=1200&auto=format&fit=crop', details:'Pancreas produces digestive enzymes and hormones like insulin.', importance:'Important for digestion and blood sugar regulation; dysfunction causes diabetes.'}
+        ];
+
+        const grid = document.getElementById('grid');
+
+        organs.forEach(o => {
+            const card = document.createElement('article');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${o.img}" alt="${o.name}" loading="lazy" />
+                <h3>${o.name}</h3>
+                <div class="meta">Short overview</div>
+                <div class="section-title">Details</div>
+                <div class="details">${o.details}</div>
+                <div class="section-title">Importance</div>
+                <div class="importance">${o.importance}</div>
+            `;
+
+            // Demo: clicking opens a focused dialog (simple alert for now)
+            card.addEventListener('click', () => {
+                alert(`${o.name}\n\nDetails: ${o.details}\n\nImportance: ${o.importance}`);
+            });
+
+            grid.appendChild(card);
+        });
+    </script>
+</body>
+</html>
